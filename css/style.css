@@ -1,0 +1,27 @@
+#gif-input{
+
+
+color: blue;
+
+}
+
+
+#add-gif {
+background-color: black;
+color: white;
+
+}
+
+
+label {
+color: red;
+font-family: 'PT Serif', serif;
+font-size: 18px;
+
+}
+
+
+button{
+
+  background-color: blue;
+}
