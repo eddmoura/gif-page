@@ -5,11 +5,20 @@ color: blue;
 
 }
 
+#gif-view{
+
+  align-content: inherit;
+}
+
 
 #add-gif {
 background-color: black;
 color: white;
 
+}
+
+form{
+  text-align: right;
 }
 
 
@@ -22,6 +31,17 @@ font-size: 18px;
 
 
 button{
-
+  font-size: 15px;
   background-color: blue;
+}
+
+header{
+
+
+font-size: 40px;
+text-align: center;
+color: lightgreen;
+padding-bottom: 20px;
+border-color: blue;
+
 }

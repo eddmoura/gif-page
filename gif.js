@@ -1,12 +1,12 @@
 $(document).ready(function(){
 
-var gifs = [];
+var gifs = ["USA", "Brasil", "Mexico", "France"];
 
 
 
 function displayGif() {
 var gif = $(this).attr("data-name");
-var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&limit-5&api_key=dc6zaTOxFJmzC";
+var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&limit=5&api_key=dc6zaTOxFJmzC";
 
 
 
@@ -15,19 +15,29 @@ $.ajax({
           method: "GET"
         })
         .done(function(response) {
+           
            var results = response.data;
+
           for (var i = 0; i < results.length; i++){
-          var gifsDiv = $("<div class='gif'>");
+           
+          var gifsDiv = $("<div>");
+
+          var rating = results[i].rating;
+
+          var p = $("<p>").text("Rating: " + rating);
 
           var gifImage = $("<img>");
+          gifImage.attr("data-state", "still");
+          gifImage.attr("data-still", results[i].images.fixed_height_still.url);
           gifImage.attr("src", results[i].images.fixed_height.url);
+          gifImage.attr("data-animate", results[i].images.fixed_height.url);
+          gifImage.addClass("image")
+          gifsDiv.append(p);
+          gifsDiv.append(gifImage);
 
-           // var gifsDiv = $("<div class='gif'>");
-          gifsDiv.prepend(gifImage);
+          
 
-           // gifsDiv.append(gifsDiv);
-
-      $("#gifs-view").prepend(gifsDiv);
+      $("#gifs-view").append(gifsDiv);
 
       
       console.log(results);
@@ -37,9 +47,23 @@ $.ajax({
 }
 
 
+$("#gifs-view").on("click", ".image", function(){
+
+
+var state = $(this).attr("data-state");
+
+if(state === "animate"){
+$(this).attr("src", $(this).data("still"));
+$(this).attr("data-state", "still");
+} else{
+
+  $(this).attr("src", $(this).data("animate"));
+  $(this).attr("data-state", "animate");
+}
 
 
 
+});
 
 
 function buttoncreation(){
@@ -58,8 +82,7 @@ function buttoncreation(){
 
     newButton.text(gifs[i]);
 
-    // newButton.html(gifs[i]);
-
+   
     $("#gif-type").append(newButton);
 
 
@@ -73,24 +96,20 @@ event.preventDefault();
 
 var gifInput = $("#gif-input").val().trim();
 
+if(gifInput != " "){
+
 gifs.push(gifInput);
 
-// $("#gif-input").val();
+$("#gif-type").val(" ");
 
 
 buttoncreation();
 
-})
+}
+});
 
 
-$(document).on("click", ".gif", displayGif);
-
-
-
-
-buttoncreation();
-
-
+ $(document).on("click", ".gif", displayGif);
 
 
 
