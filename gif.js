@@ -1,12 +1,12 @@
 $(document).ready(function(){
 
-var gifs = ["USA", "Brasil", "Mexico", "France"];
+var gifs = [];
 
 
 
 function displayGif() {
 var gif = $(this).attr("data-name");
-var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&limit=5&api_key=dc6zaTOxFJmzC";
+var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&limit=5&api_key=dc6zaTOxFJmzC";
 
 
 
@@ -32,13 +32,14 @@ $.ajax({
           gifImage.attr("src", results[i].images.fixed_height.url);
           gifImage.attr("data-animate", results[i].images.fixed_height.url);
           gifImage.addClass("image")
-          gifsDiv.append(p);
-          gifsDiv.append(gifImage);
+          // gifsDiv.append(p);
+          // gifsDiv.append(gifImage);
 
           
 
-      $("#gifs-view").append(gifsDiv);
-
+      $("#gifs-view").append(p);
+      $("#gifs-view").append(gifImage);
+      
       
       console.log(results);
       }
@@ -94,6 +95,7 @@ $("#add-gif").on("click", function(event){
 
 event.preventDefault();
 
+
 var gifInput = $("#gif-input").val().trim();
 
 if(gifInput != " "){
@@ -106,6 +108,7 @@ $("#gif-type").val(" ");
 buttoncreation();
 
 }
+
 });
 
 
